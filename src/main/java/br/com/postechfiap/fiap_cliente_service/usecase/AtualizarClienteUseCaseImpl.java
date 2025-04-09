@@ -5,6 +5,7 @@ import br.com.postechfiap.fiap_cliente_service.adapters.EnderecoAdapter;
 import br.com.postechfiap.fiap_cliente_service.dto.ClienteRequestDTO;
 import br.com.postechfiap.fiap_cliente_service.dto.ClienteResponseDTO;
 import br.com.postechfiap.fiap_cliente_service.entities.Cliente;
+import br.com.postechfiap.fiap_cliente_service.exception.cliente.ClienteNaoEncontradoException;
 import br.com.postechfiap.fiap_cliente_service.interfaces.repository.ClienteRepository;
 import br.com.postechfiap.fiap_cliente_service.interfaces.usecases.AtualizarClienteUseCase;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class AtualizarClienteUseCaseImpl implements AtualizarClienteUseCase {
     @Override
     public ClienteResponseDTO executar(Long id, ClienteRequestDTO dto) {
         Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+                .orElseThrow(() -> new ClienteNaoEncontradoException(id));
 
         cliente.setNome(dto.nome());
         cliente.setCpf(dto.cpf());
