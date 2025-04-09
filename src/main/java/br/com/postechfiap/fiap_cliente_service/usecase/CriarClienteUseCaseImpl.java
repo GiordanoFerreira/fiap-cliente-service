@@ -19,6 +19,10 @@ public class CriarClienteUseCaseImpl implements CriarClienteUseCase {
     public ClienteResponseDTO executar(ClienteRequestDTO dto) {
         Cliente cliente = ClienteAdapter.toEntity(dto);
 
+        if (clienteRepository.findByCpf(cliente.getCpf()).isPresent()) {
+            throw new RuntimeException("CPF já cadastrado.");
+        }
+
         cliente.getEnderecos().forEach(e -> e.setCliente(cliente));
 
         Cliente salvo = clienteRepository.save(cliente);

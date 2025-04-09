@@ -14,6 +14,7 @@ public class ClienteAdapter {
 
         return Cliente.builder()
                 .nome(dto.nome())
+                .dataNascimento(dto.dataNascimento())
                 .cpf(dto.cpf())
                 .email(dto.email())
                 .enderecos(dto.enderecos() != null ?
@@ -30,6 +31,7 @@ public class ClienteAdapter {
         return new ClienteResponseDTO(
                 cliente.getId(),
                 cliente.getNome(),
+                cliente.getDataNascimento(),
                 cliente.getCpf(),
                 cliente.getEmail(),
                 cliente.getEnderecos() != null ?

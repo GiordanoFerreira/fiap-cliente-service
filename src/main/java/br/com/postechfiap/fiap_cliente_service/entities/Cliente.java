@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,11 @@ public class Cliente extends BaseEntity<Long>{
     @NotBlank(message = "O nome é obrigatório!")
     @Column(nullable = false)
     private String nome;
+
+    @Setter
+    @NotBlank(message = "A data de nascimento é obrigatório!")
+    @Column(nullable = false)
+    private LocalDate dataNascimento;
 
     @Setter
     @NotBlank(message = "O CPF é obrigatório!")

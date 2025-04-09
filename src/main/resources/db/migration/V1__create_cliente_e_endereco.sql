@@ -3,6 +3,7 @@ CREATE SEQUENCE cliente_id_seq START WITH 1 INCREMENT BY 1;
 CREATE TABLE cliente(
     id BIGINT PRIMARY KEY DEFAULT nextval('cliente_id_seq'),
     nome VARCHAR(150) NOT NULL,
+    data_nascimento DATE NOT NULL DEFAULT '2000-01-01',
     cpf VARCHAR(11) UNIQUE NOT NULL,
     email VARCHAR(150) NOT NULL,
     created_at TIMESTAMP DEFAULT now(),
