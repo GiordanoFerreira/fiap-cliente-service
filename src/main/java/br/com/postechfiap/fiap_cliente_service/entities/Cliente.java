@@ -1,5 +1,6 @@
 package br.com.postechfiap.fiap_cliente_service.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
@@ -33,8 +34,8 @@ public class Cliente extends BaseEntity<Long>{
     private String nome;
 
     @Setter
-    @NotBlank(message = "A data de nascimento é obrigatório!")
-    @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
     @Setter
