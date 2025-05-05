@@ -2,10 +2,7 @@ package br.com.postechfiap.fiap_cliente_service.controller;
 
 import br.com.postechfiap.fiap_cliente_service.dto.ClienteRequestDTO;
 import br.com.postechfiap.fiap_cliente_service.dto.ClienteResponseDTO;
-import br.com.postechfiap.fiap_cliente_service.interfaces.usecases.AtualizarClienteUseCase;
-import br.com.postechfiap.fiap_cliente_service.interfaces.usecases.BuscarTodosClientesUseCase;
-import br.com.postechfiap.fiap_cliente_service.interfaces.usecases.CriarClienteUseCase;
-import br.com.postechfiap.fiap_cliente_service.interfaces.usecases.DeletarClienteUseCase;
+import br.com.postechfiap.fiap_cliente_service.interfaces.usecases.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -28,6 +25,7 @@ public class ClienteController {
 
     private final CriarClienteUseCase criarClienteUseCase;
     private final BuscarTodosClientesUseCase buscarTodosClientesUseCase;
+    private final BuscarClientePorIdUseCase buscarClientePorIdUseCase;
     private final AtualizarClienteUseCase atualizarClienteUseCase;
     private final DeletarClienteUseCase deletarClienteUseCase;
 
@@ -49,6 +47,12 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<List<ClienteResponseDTO>> listarCliente(@RequestParam(required = false) String nome) {
         return ResponseEntity.ok(buscarTodosClientesUseCase.executar(nome));
+    }
+
+    @Operation(summary = "Buscar Cliente pelo ID", description = "Retorna um Cliente filtrado por ID")
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<ClienteResponseDTO> buscarClientePorId(@PathVariable Long id) {
+        return ResponseEntity.ok(buscarClientePorIdUseCase.executar(id));
     }
 
     @Operation(summary = "Atualizar Cliente", description = "Atualiza os dados de um Cliente")
